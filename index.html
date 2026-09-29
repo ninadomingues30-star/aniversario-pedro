@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniversário de 15 Anos do Pedro - RSVP Gamer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0b10;
+            --neon-green: #ccff00;
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff007f;
+            --card-bg: rgba(16, 20, 32, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Elementos de fundo gamer (GTA/FIFA/PS5) */
+        .gaming-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(204, 255, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.08) 0%, transparent 50%),
+                linear-gradient(rgba(10, 11, 16, 0.9), rgba(10, 11, 16, 0.95));
+            z-index: -2;
+        }
+
+        /* Efeito Scanlines / Grid */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 6px 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Símbolos flutuantes do PlayStation */
+        .floating-symbols {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.15;
+            font-family: 'Teko', sans-serif;
+            font-size: 3rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 10px;
+            border-bottom: 2px solid var(--neon-blue);
+            margin-bottom: 30px;
+            background: rgba(10, 11, 16, 0.6);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .badge-15 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-green);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+        }
+
+        h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(4px);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box.full {
+            grid-column: span 2;
+            border-left-color: var(--neon-blue);
+        }
+
+        .info-title {
+            font-size: 0.85rem;
+            color: #8fa1b3;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .map-btn {
+            display: inline-block;
+            margin-top: 8px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .map-btn:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed rgba(204, 255, 0, 0.3);
+            padding-bottom: 5px;
+        }
+
+        /* Estilo do Pix */
+        .pix-container {
+            text-align: center;
+        }
+
+        .qrcode-box {
+            background: #fff;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .qrcode-box img {
+            width: 180px;
+            height: 180px;
+            display: block;
+        }
+
+        .pix-key-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px dashed var(--neon-green);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--neon-green);
+            margin-bottom: 12px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--neon-green);
+            color: #0a0b10;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        /* Formulário RSVP */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: #c5d1df;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 8px rgba(204, 255, 0, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            color: #0a0b10;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 25px var(--neon-green);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #6b7c93;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gaming-bg"></div>
+    <div class="scanlines"></div>
+    <div class="floating-symbols">
+        <span>△</span><span>○</span><span>✕</span><span>▢</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="badge-15">Aniversário de 15 Anos</div>
+            <h1>Pedro</h1>
+            <div class="subtitle">Quem vem tomar uma surra? • Só Jogos</div>
+        </header>
+
+        <!-- Informações do Evento -->
+        <div class="card">
+            <h2>🎮 Detalhes da Partida</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-title">Data</div>
+                    <div class="info-value">03/10/2026</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-title">Horário</div>
+                    <div class="info-value">16:00 H</div>
+                </div>
+                <div class="info-box full">
+                    <div class="info-title">Local</div>
+                    <div class="info-value">Salão de Festas do Condomínio Jardim dos Alpes</div>
+                    <a href="https://maps.google.com/?q=Salão+de+Festas+do+Condomínio+Jardim+dos+Alpes+Cotia" target="_blank" class="map-btn">📍 Abrir no Google Maps</a>
+                </div>
+                <div class="info-box full" style="border-left-color: var(--neon-pink);">
+                    <div class="info-title">Bebida</div>
+                    <div class="info-value">Cada um traz a sua bebida! 🍻</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção do Pix -->
+        <div class="card">
+            <h2>🎁 Presente via Pix</h2>
+            <p style="margin-bottom: 15px; font-size: 1.05rem; color: #c5d1df;">O Pedro prefere Pix do que presentes físicos para investir no setup dele! Escaneie o QR Code ou copie a chave abaixo:</p>
+            <div class="pix-container">
+                <div class="qrcode-box">
+                    <!-- Imagem oficial do QR Code fornecida -->
+                    <img src="watermarked_img_11941075096402403446.jpg" alt="QR Code Pix Pedro">
+                </div>
+                <div class="pix-key-box" id="pixKey">446.867.198-01</div>
+                <button class="copy-btn" onclick="copyPixKey()">Copiar Chave Pix</button>
+            </div>
+        </div>
+
+        <!-- Formulário de RSVP -->
+        <div class="card">
+            <h2>🕹️ Confirmação de Presença (RSVP)</h2>
+            <!-- Configurado para enviar diretamente para o seu e-mail via FormSubmit -->
+            <form action="https://formsubmit.co/nina.domingues30@gmail.com" method="POST">
+                <!-- Configurações adicionais do FormSubmit -->
+                <input type="hidden" name="_subject" value="Nova Confirmação de Presença - Aniversário do Pedro!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <div class="form-group">
+                    <label for="nome">Seu Nome / Gamertag:</label>
+                    <input type="text" id="nome" name="Nome_Convidado" required placeholder="Digite seu nome completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Vai tankar a partida?</label>
+                    <select id="status" name="Confirmacao" required>
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="Sim, vou!">Sim, vou!</option>
+                        <option value="Infelizmente não poderei comparecer">Infelizmente não poderei comparecer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="jogo">Qual seu jogo favorito para o aquecimento?</label>
+                    <select id="jogo" name="Jogo_Favorito">
+                        <option value="FIFA">FIFA / EA Sports FC</option>
+                        <option value="GTA">Grand Theft Auto (GTA)</option>
+                        <option value="Ambos">Ambos / Outros Jogos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recado">Recado para o aniversariante:</label>
+                    <textarea id="recado" name="Recado" rows="3" placeholder="Mande uma provocação ou os parabéns..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirmar Presença (Enviar)</button>
+            </form>
+        </div>
+
+        <footer>
+            Aniversario do Pedro • 15 Anos 🚀
+        </footer>
+    </div>
+
+    <script>
+        function copyPixKey() {
+            const pixKey = "446.867.198-01";
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = "Chave Pix Copiada! ✓";
+                btn.style.background = "#fff";
+                btn.style.color = "#000";
+                setTimeout(() => {
+                    btn.textContent = "Copiar Chave Pix";
+                    btn.style.background = "var(--neon-green)";
+                    btn.style.color = "#0a0b10";
+                }, 3000);
+            }).catch(err => {
+                alert('Erro ao copiar chave.');
+            });
+        }
+    </script>
+</body>
+</html>
